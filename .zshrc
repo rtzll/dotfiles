@@ -12,9 +12,7 @@ antigen bundle zsh-users/zsh-completions
 antigen apply
 
 # User configuration
-export PATH=$PATH:$HOME/.bin          # lein (clojure)
-export PATH=$PATH:/opt/idea/bin       # intellij idea (java)
-export PATH=$PATH:/opt/node/bin       # node
+export PATH=$PATH:/opt/idea/bin       # intellij idea
 export PATH=$PATH:/usr/local/ssl/bin/ # latest openssl version
 export PATH=$PATH:/usr/local/go/bin   # golang
 export GOPATH=$HOME/src/go            # GOPATH
@@ -26,7 +24,9 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export EDITOR=vim
 
-alias zshconfig="$EDITOR ~/.zshrc"
+alias zshconfig="$EDITOR $HOME/.zshrc"
+alias vimconfig="$EDITOR $HOME/.vimrc"
+
 alias install="sudo apt-get install"
 alias remove="sudo apt-get remove"
 alias update="sudo apt-get update"

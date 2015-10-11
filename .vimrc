@@ -5,12 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-
 Plugin 'L9'
-Plugin 'airblade/vim-gitgutter'
 
 Plugin 'klen/python-mode'
 Plugin 'davidhalter/jedi-vim'
@@ -19,19 +14,20 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'ecomba/vim-ruby-refactoring'
 
-Plugin 'bling/vim-airline'
-
 Plugin 'mhinz/vim-startify'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 
-Plugin 'fatih/vim-go'
-
+Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 
@@ -48,6 +44,7 @@ set number                      " Show line numbers
 set backspace=indent,eol,start  " Makes backspace key more powerful.
 set showcmd                     " Show me what I'm typing
 set showmode                    " Show current mode.
+set cursorline                  " Highlight current line
 
 set noswapfile                  " Don't use swapfile
 set nobackup            	" Don't create annoying backup files
@@ -58,6 +55,8 @@ set autowrite                   " Automatically save before :next, :make etc.
 set autoread                    " Automatically reread changed files without asking me anything
 set hidden
 set nowrap
+set tabstop=4                   " Number of visual spaces per TAB
+set softtabstop=4               " Number of spaces in tab when editing
 
 " airline settings
 set laststatus=2
@@ -67,8 +66,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 set noshowmatch                 " Do not show matching brackets by flickering
-set nocursorcolumn
-set noshowmode                  " We show the mode with airlien or lightline
+set noshowmode                  " We show the mode with airline
 set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
@@ -79,13 +77,9 @@ set ttyscroll=3
 set lazyredraw          	" Wait to redraw "
 
 " speed up syntax highlighting
-set nocursorcolumn
-set nocursorline
-
 syntax sync minlines=256
 set synmaxcol=300
 set re=1
-" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " open help vertically
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -93,8 +87,8 @@ autocmd FileType help wincmd L
 
 " setup style
 syntax enable
-let base16colorspace=256  " Access colors present in 256 colorspace
-set background=dark
-colorscheme base16-default
+let base16colorspace=256        " Access colors present in 256 colorspace
+set background=dark             " Dark backgroung, no suprise.
+colorscheme base16-default      " see base16-vim
 set t_Co=256
 

@@ -13,6 +13,7 @@ antigen apply
 
 # User configuration
 export PATH=$PATH:/opt/idea/bin       # intellij idea
+export PATH=$PATH:/opt/pycharm/bin    # pycharm (pro)
 export PATH=$PATH:/usr/local/ssl/bin/ # latest openssl version
 export PATH=$PATH:/usr/local/go/bin   # golang
 export GOPATH=$HOME/src/go            # GOPATH

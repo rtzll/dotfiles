@@ -12,10 +12,9 @@ antigen bundle zsh-users/zsh-completions
 antigen apply
 
 # User configuration
-export PATH=$PATH:/usr/local/ssl/bin  # latest openssl version
-export PATH=$PATH:/usr/local/go/bin   # golang
-export GOPATH=$HOME/src/go            # GOPATH
-export PATH=$PATH:$GOPATH/bin         # include go binaries
+export PATH=$PATH:/usr/local/go/bin  # golang
+export GOPATH=$HOME/src/go           # GOPATH
+export PATH=$PATH:$GOPATH/bin        # include go binaries
 
 source $HOME/.local/bin/virtualenvwrapper.sh
 source $ZSH/oh-my-zsh.sh
@@ -37,4 +36,3 @@ alias tmux="tmux -2"
 # Base16 Shell, see https://github.com/chriskempson/base16-shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-

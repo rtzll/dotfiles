@@ -12,6 +12,7 @@ antigen bundle zsh-users/zsh-completions
 antigen apply
 
 # User configuration
+export PATH=$PATH:/usr/lib/dart/bin  # dart
 export PATH=$PATH:/usr/local/go/bin  # golang
 export GOPATH=$HOME/src/go           # GOPATH
 export PATH=$PATH:$GOPATH/bin        # include go binaries

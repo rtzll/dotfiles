@@ -17,7 +17,7 @@ export PATH=$PATH:/usr/local/go/bin  # go
 export PATH=$PATH:$HOME/.local/bin   # binaries installed via pip
 export GOPATH=$HOME/src/go           # GOPATH
 export PATH=$PATH:$GOPATH/bin        # include go binaries
-
+export WORKON_HOME=$HOME/.virtualenvs
 source $HOME/.local/bin/virtualenvwrapper.sh
 source $ZSH/oh-my-zsh.sh
 

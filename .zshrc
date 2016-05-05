@@ -1,6 +1,7 @@
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
+# include zsh completions
 fpath=(~/.zsh/completion $fpath)
 
 # antigen settings
@@ -11,19 +12,23 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen apply
 
-# User configuration
-export PATH=$PATH:/usr/lib/dart/bin  # dart
+# Setup for go
 export PATH=$PATH:/usr/local/go/bin  # go
-export PATH=$PATH:$HOME/.local/bin   # binaries installed via pip
 export GOPATH=$HOME/src/go           # GOPATH
-export PATH=$PATH:$GOPATH/bin        # include go binaries
+export PATH=$PATH:$GOPATH/bin        # include go bin directory
+export PATH=$PATH:$HOME/.local/bin   # scripts installed via pip
+export PATH=$PATH:$HOME/bin          # leiningen
+
+# Setup for pythons virtual environments
+export VIRTUALENV_PYTHON=`which python3`
 export WORKON_HOME=$HOME/.virtualenvs
 source $HOME/.local/bin/virtualenvwrapper.sh
-source $ZSH/oh-my-zsh.sh
 
+source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export EDITOR=vim
 
+# shortcuts
 alias zshconfig="$EDITOR $HOME/.zshrc"
 alias vimconfig="$EDITOR $HOME/.vimrc"
 

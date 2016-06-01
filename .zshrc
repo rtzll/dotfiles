@@ -34,11 +34,11 @@ export EDITOR=vim
 alias zshconfig="$EDITOR $HOME/.zshrc"
 alias vimconfig="$EDITOR $HOME/.vimrc"
 
-alias install="sudo apt-get install"
-alias remove="sudo apt-get remove"
-alias update="sudo apt-get update"
-alias upgrade="sudo apt-get update && sudo apt-get upgrade"
-alias dupgrade="sudo apt-get dist-upgrade && sudo apt-get autoremove"
+alias install="sudo apt install"
+alias remove="sudo apt remove"
+alias update="sudo apt update"
+alias upgrade="sudo apt update && sudo apt upgrade"
+alias dupgrade="sudo apt dist-upgrade && sudo apt autoremove"
 alias lsd="ls -d -- */"
 alias tmux="tmux -2"
 

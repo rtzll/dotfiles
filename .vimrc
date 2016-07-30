@@ -10,25 +10,21 @@ Plugin 'L9'
 Plugin 'klen/python-mode'
 Plugin 'davidhalter/jedi-vim'
 
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'ecomba/vim-ruby-refactoring'
-
 Plugin 'mhinz/vim-startify'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
+
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fireplace'
+Plugin 'airblade/vim-gitgutter'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 
-Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'chriskempson/base16-vim'
+
 Plugin 'fatih/vim-go'
 
 call vundle#end()
@@ -91,6 +87,6 @@ autocmd FileType help wincmd L
 syntax enable
 let base16colorspace=256        " Access colors present in 256 colorspace
 set background=dark             " Dark backgroung, no suprise.
-colorscheme base16-default      " see base16-vim
+colorscheme base16-default-dark " see base16-vim
 set t_Co=256
 

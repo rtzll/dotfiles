@@ -45,7 +45,7 @@ set showmode                    " Show current mode.
 set cursorline                  " Highlight current line
 
 set noswapfile                  " Don't use swapfile
-set nobackup            	" Don't create annoying backup files
+set nobackup                    " Don't create annoying backup files
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
 set encoding=utf-8              " Set default encoding to UTF-8
@@ -90,3 +90,5 @@ set background=dark             " Dark backgroung, no suprise.
 colorscheme base16-default-dark " see base16-vim
 set t_Co=256
 
+" Key mappings
+map <F2> :NERDTreeToggle<CR>

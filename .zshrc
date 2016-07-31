@@ -40,7 +40,6 @@ alias update="sudo apt update"
 alias upgrade="sudo apt update && sudo apt upgrade"
 alias dupgrade="sudo apt dist-upgrade && sudo apt autoremove"
 alias lsd="ls -d -- */"
-alias tmux="tmux -2"
 
 # Base16 Shell, see https://github.com/chriskempson/base16-shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"

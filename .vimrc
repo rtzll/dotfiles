@@ -13,6 +13,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -60,8 +61,8 @@ set softtabstop=4               " Number of spaces in tab when editing
 set laststatus=2
 let g:airline_powerline_fonts=1 " requires powerline fonts, see https://github.com/powerline/fonts
 let g:airline_theme='base16'    " also nice: bubblegum
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
 
 set noshowmatch                 " Do not show matching brackets by flickering
 set noshowmode                  " We show the mode with airline
@@ -89,6 +90,11 @@ let base16colorspace=256        " Access colors present in 256 colorspace
 set background=dark             " Dark backgroung, no suprise.
 colorscheme base16-default-dark " see base16-vim
 set t_Co=256
+
+" use ag instead of ack (if installed)
+if executable('ag')
+	let g:ackprg='ag --vimgrep'
+endif
 
 " Key mappings
 map <F2> :NERDTreeToggle<CR>

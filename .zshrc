@@ -24,7 +24,7 @@ export ANDROID_HOME=/opt/android
 # Setup for pythons virtual environments
 export VIRTUALENV_PYTHON=`which python3`
 export WORKON_HOME=$HOME/.virtualenvs
-source $HOME/.local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8

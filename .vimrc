@@ -27,6 +27,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'chriskempson/base16-vim'
 
 Plugin 'fatih/vim-go'
+Plugin 'SirVer/ultisnips'
 
 call vundle#end()
 
@@ -54,8 +55,6 @@ set autowrite                   " Automatically save before :next, :make etc.
 set autoread                    " Automatically reread changed files without asking me anything
 set hidden
 set nowrap
-set tabstop=4                   " Number of visual spaces per TAB
-set softtabstop=4               " Number of spaces in tab when editing
 
 " airline settings
 set laststatus=2
@@ -73,7 +72,7 @@ set smartcase                   " ... but not when search pattern contains upper
 set ttyfast
 set ttymouse=xterm2
 set ttyscroll=3
-set lazyredraw          	" Wait to redraw "
+set lazyredraw          	    " Wait to redraw
 
 " speed up syntax highlighting
 syntax sync minlines=256

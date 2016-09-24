@@ -16,10 +16,8 @@ antigen apply
 export PATH=$PATH:/usr/local/go/bin  # go
 export GOPATH=$HOME/src/go           # GOPATH
 export PATH=$PATH:$GOPATH/bin        # include go bin directory
-export PATH=$PATH:$HOME/.local/bin   # scripts installed via pip
-export PATH=$PATH:$HOME/bin          # leiningen
 
-export ANDROID_HOME=/opt/android
+export PATH=$PATH:$HOME/bin          # leiningen
 
 # Setup for pythons virtual environments
 export VIRTUALENV_PYTHON=`which python3`

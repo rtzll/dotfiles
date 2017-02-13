@@ -26,6 +26,11 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
 
+Plugin 'jgdavey/tslime.vim'
+Plugin 'tpope/vim-fireplace'
+" orignally 'amdt/vim-niji', but does no longer exist
+Plugin 'raymond-w-ko/vim-niji'
+
 call vundle#end()
 
 set nocompatible                " be iMproved, required

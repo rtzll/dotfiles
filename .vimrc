@@ -7,9 +7,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'L9'
 
-Plugin 'klen/python-mode'
-Plugin 'davidhalter/jedi-vim'
-
 Plugin 'mhinz/vim-startify'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'

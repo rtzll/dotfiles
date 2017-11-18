@@ -1,37 +1,41 @@
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'L9'
+Plug 'tpope/vim-sensible'
+Plug 'mhinz/vim-startify'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'kien/ctrlp.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'mileszs/ack.vim'
 
-Plugin 'mhinz/vim-startify'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chriskempson/base16-vim'
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'chriskempson/base16-vim'
+" go related
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'SirVer/ultisnips', { 'for': 'go' }
 
-Plugin 'fatih/vim-go'
-Plugin 'SirVer/ultisnips'
+Plug 'elmcast/elm-vim'
 
-Plugin 'jgdavey/tslime.vim'
-Plugin 'tpope/vim-fireplace'
+Plug 'jgdavey/tslime.vim'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " orignally 'amdt/vim-niji', but does no longer exist
-Plugin 'raymond-w-ko/vim-niji'
+Plug 'raymond-w-ko/vim-niji', { 'for': 'clojure' }
 
-call vundle#end()
+Plug 'rust-lang/rust.vim'
+
+call plug#end()
 
 set nocompatible                " be iMproved, required
 filetype off                    " required

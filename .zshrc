@@ -12,12 +12,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen apply
 
-# Setup for go
 export PATH=$PATH:/usr/local/go/bin  # go
-export GOPATH=$HOME/src/go           # GOPATH
-export PATH=$PATH:$GOPATH/bin        # include go bin directory
-
 export PATH=$PATH:$HOME/bin          # leiningen
+export PATH=$PATH:$HOME/.local/bin   # python
 
 # Setup for pythons virtual environments
 export VIRTUALENV_PYTHON=`which python3`

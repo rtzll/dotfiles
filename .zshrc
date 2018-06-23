@@ -43,5 +43,7 @@ alias less="less -S"
 
 # Base16 Shell, see https://github.com/chriskempson/base16-shell
 BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_monokai
+[ -n "$PS1" ] && \
+	[ -s $BASE16_SHELL/profile_helper.sh ] && \
+		eval "$($BASE16_SHELL/profile_helper.sh)"
+# normally I use: base16_monokai (type "base16_" and tab for alternatives)

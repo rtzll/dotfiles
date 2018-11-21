@@ -13,7 +13,7 @@ antigen bundle zsh-users/zsh-completions
 antigen apply
 
 export PATH=$PATH:$HOME/bin          # leiningen
-export PATH=$PATH:$HOME/.local/bin   # python
+export PATH=$PATH:$HOME/.local/bin   # python packages
 
 # setup environment for go
 export PATH=$PATH:/usr/local/go/bin

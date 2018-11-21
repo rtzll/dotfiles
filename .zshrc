@@ -20,11 +20,6 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:/$GOPATH/bin
 
-# setup for pythons virtual environments
-export VIRTUALENV_PYTHON=`which python3`
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export EDITOR=vim

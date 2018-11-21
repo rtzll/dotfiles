@@ -32,9 +32,7 @@ alias install="sudo apt install"
 alias remove="sudo apt remove"
 alias update="sudo apt update"
 alias upgrade="sudo apt update && sudo apt upgrade"
-alias dupgrade="sudo apt dist-upgrade && sudo apt-get autoremove"
-alias lsd="ls -d -- */"
-alias less="less -S"
+alias dupgrade="sudo apt dist-upgrade && sudo apt autoremove"
 
 # Base16 Shell, see https://github.com/chriskempson/base16-shell
 BASE16_SHELL=$HOME/.config/base16-shell/

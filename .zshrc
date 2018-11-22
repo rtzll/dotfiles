@@ -4,13 +4,7 @@ ZSH_THEME="robbyrussell"
 # include zsh completions
 fpath=(~/.zsh/completion $fpath)
 
-# antigen settings
-source ~/antigen.zsh
-antigen use oh-my-zsh
-antigen bundle git
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-completions
-antigen apply
+source <(antibody init)
 
 export PATH=$PATH:$HOME/bin          # leiningen
 export PATH=$PATH:$HOME/.local/bin   # python packages

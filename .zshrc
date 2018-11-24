@@ -34,3 +34,6 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 	[ -s $BASE16_SHELL/profile_helper.sh ] && \
 		eval "$($BASE16_SHELL/profile_helper.sh)"
 # normally I use: base16_monokai (type "base16_" and tab for alternatives)
+
+# fuzzy finder: https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

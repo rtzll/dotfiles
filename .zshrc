@@ -6,8 +6,9 @@ fpath=(~/.zsh/completion $fpath)
 
 source <(antibody init)
 
-export PATH=$PATH:$HOME/bin          # leiningen
-export PATH=$PATH:$HOME/.local/bin   # python packages
+export PATH=$PATH:$HOME/bin            # leiningen
+export PATH=$PATH:$HOME/.local/bin     # python packages
+export PATH=/home/cr/.nimble/bin:$PATH # nim packages
 
 # setup environment for go
 export PATH=$PATH:/usr/local/go/bin

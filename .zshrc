@@ -6,9 +6,9 @@ fpath=(~/.zsh/completion $fpath)
 
 source <(antibody init)
 
-export PATH=$PATH:$HOME/bin            # leiningen
-export PATH=$PATH:$HOME/.local/bin     # python packages
-export PATH=/home/cr/.nimble/bin:$PATH # nim packages
+export PATH=$PATH:$HOME/bin          # leiningen
+export PATH=$PATH:$HOME/.local/bin   # python packages
+export PATH=$PATH:$HOME/.yarn/bin    # yarn (node) packages
 
 # setup environment for go
 export PATH=$PATH:/usr/local/go/bin
@@ -38,3 +38,6 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 # fuzzy finder: https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export SDKMAN_DIR=$HOME/.sdkman
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

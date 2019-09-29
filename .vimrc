@@ -35,6 +35,7 @@ Plug 'raymond-w-ko/vim-niji', { 'for': 'clojure' }
 
 Plug 'rust-lang/rust.vim'
 
+Plug '~/.fzf'
 call plug#end()
 
 set nocompatible                " be iMproved, required

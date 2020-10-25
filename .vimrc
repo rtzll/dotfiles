@@ -1,54 +1,29 @@
-
-set nocompatible
-filetype off
 call plug#begin('~/.vim/plugged')
-
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'mhinz/vim-startify'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'kien/ctrlp.vim'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'mileszs/ack.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
+" git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" pretty
 Plug 'chriskempson/base16-vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'itchyny/lightline.vim'
+Plug 'Yggdroot/indentLine'
 
-" go related
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'SirVer/ultisnips', { 'for': 'go' }
-
-Plug 'elmcast/elm-vim'
-
-Plug 'jgdavey/tslime.vim'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-" orignally 'amdt/vim-niji', but does no longer exist
-Plug 'raymond-w-ko/vim-niji', { 'for': 'clojure' }
-
-Plug 'rust-lang/rust.vim'
-
-Plug '~/.fzf'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
-set nocompatible                " be iMproved, required
-filetype off                    " required
-
-filetype plugin indent on       " required
-
-"
 "" Settings
 "
 set noerrorbells                " No beeps
 set number                      " Show line numbers
-set backspace=indent,eol,start  " Makes backspace key more powerful.
 set showcmd                     " Show me what I'm typing
 set showmode                    " Show current mode.
 set cursorline                  " Highlight current line
@@ -63,16 +38,7 @@ set autoread                    " Automatically reread changed files without ask
 set hidden
 set nowrap
 
-" airline settings
-set laststatus=2
-let g:airline_powerline_fonts=1 " requires powerline fonts, see https://github.com/powerline/fonts
-let g:airline_theme='base16'    " also nice: bubblegum
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#formatter='unique_tail'
-
 set noshowmatch                 " Do not show matching brackets by flickering
-set noshowmode                  " We show the mode with airline
-set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
@@ -86,21 +52,12 @@ syntax sync minlines=256
 set synmaxcol=300
 set re=1
 
-" open help vertically
-command! -nargs=* -complete=help Help vertical belowright help <args>
-autocmd FileType help wincmd L
-
 " setup style
 syntax enable
 let base16colorspace=256        " Access colors present in 256 colorspace
 set background=dark             " Dark backgroung, no suprise.
 colorscheme base16-default-dark " see base16-vim
 set t_Co=256
-
-" use ag instead of ack (if installed)
-if executable('ag')
-	let g:ackprg='ag --vimgrep'
-endif
 
 " Key mappings
 map <F2> :NERDTreeToggle<CR>

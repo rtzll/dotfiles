@@ -1,33 +1,29 @@
 let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
+Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-startify'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " pretty
-Plug 'chriskempson/base16-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
-
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'preservim/nerdcommenter'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'ap/vim-buftabline'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 "" Settings
-"
 set noerrorbells                " No beeps
-set number                      " Show line numbers
 set showcmd                     " Show me what I'm typing
-set showmode                    " Show current mode.
+set noshowmode                  " Don't show current mode.
 set cursorline                  " Highlight current line
 
 set noswapfile                  " Don't use swapfile
@@ -38,7 +34,6 @@ set encoding=utf-8              " Set default encoding to UTF-8
 set autowrite                   " Automatically save before :next, :make etc.
 set autoread                    " Automatically reread changed files without asking me anything
 set hidden
-set nowrap
 
 set noshowmatch                 " Do not show matching brackets by flickering
 set hlsearch                    " Highlight found searches
@@ -56,10 +51,13 @@ set re=1
 
 " setup style
 syntax enable
-let base16colorspace=256        " Access colors present in 256 colorspace
-set background=dark             " Dark backgroung, no suprise.
-colorscheme base16-default-dark " see base16-vim
-set t_Co=256
+set background=dark
+autocmd vimenter * ++nested colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_termcolors=16
+set laststatus=2
 
 " Key mappings
 map <F2> :NERDTreeToggle<CR>
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>

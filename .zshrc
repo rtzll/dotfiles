@@ -3,8 +3,7 @@ ZSH_THEME="takashiyoshida"
 
 # include zsh completions
 fpath=(~/.zsh/completion $fpath)
-
-source <(antibody init)
+source ~/.zsh_plugins.sh
 
 export PATH=$PATH:$HOME/bin          # leiningen et al.
 export PATH=$PATH:$HOME/.local/bin   # python packages

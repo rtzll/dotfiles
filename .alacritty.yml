@@ -2,7 +2,7 @@ font:
   size: 12
   normal:
     # from: https://github.com/ryanoasis/nerd-fonts
-    family: "Fira Mono Medium"
+    family: "Fira Mono"
 
 # Colors (Blood Moon)
 # from: https://github.com/rajasegar/alacritty-themes/blob/v2.0.2/themes/Blood-Moon.yml

@@ -1,5 +1,5 @@
 let mapleader = "\<Space>"
-
+let g:polyglot_disabled = ['markdown']
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'mhinz/vim-startify'
@@ -7,17 +7,20 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " pretty
-Plug 'ryanoasis/vim-devicons'
+Plug 'sjl/badwolf'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'itchyny/lightline.vim'
+Plug 'voldikss/vim-floaterm'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-buftabline'
-Plug 'morhetz/gruvbox'
 call plug#end()
 
 "" Settings
@@ -38,10 +41,10 @@ set hidden
 set noshowmatch                 " Do not show matching brackets by flickering
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
-set smartcase                   " ... but not when search pattern contains upper case characters
-set ttyfast
-set ttymouse=xterm2
-set ttyscroll=3
+" set smartcase                   " ... but not when search pattern contains upper case characters
+" set ttyfast
+" set ttymouse=xterm2
+" set ttyscroll=3
 set lazyredraw          	    " Wait to redraw
 
 " speed up syntax highlighting
@@ -49,12 +52,15 @@ syntax sync minlines=256
 set synmaxcol=300
 set re=1
 
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 " setup style
 syntax enable
-set background=dark
-autocmd vimenter * ++nested colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_termcolors=16
+colorscheme badwolf
 set laststatus=2
 
 " Key mappings

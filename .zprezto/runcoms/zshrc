@@ -1,0 +1,92 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
+
+alias vim=nvim
+alias vi=nvim
+
+export EDITOR=nvim
+export VISUAL=nvim
+export PAGER=less
+export LESS="-F -g -i -M -R -S -w -X -z-4"
+export LANG="en_US.UTF-8"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export PATH="$PATH:$HOME/development/flutter/bin"
+
+# pnpm
+export PNPM_HOME="/Users/christianrotzoll/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# McFly - fly through your shell history
+eval "$(mcfly init zsh)"
+
+# export PATH="$PATH:/Applications/Racket/bin"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export DENO_INSTALL="/Users/christianrotzoll/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# qt
+export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/qt@5/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/qt@5/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/qt@5/lib/pkgconfig"
+
+# bun completions
+[ -s "/Users/christianrotzoll/.bun/_bun" ] && source "/Users/christianrotzoll/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# zls for zig lsp
+export PATH="$HOME/development/zls/zig-out/bin:$PATH"
+
+# put LLVM on the path
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# golang bin dir on path
+export PATH="$HOME/go/bin:$PATH"
+
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/christianrotzoll/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+    conda deactivate
+else
+    if [ -f "/Users/christianrotzoll/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/christianrotzoll/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/christianrotzoll/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

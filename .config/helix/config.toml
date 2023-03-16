@@ -1,0 +1,16 @@
+theme = "onedarker"
+
+[editor]
+true-color = true
+line-number = "relative"
+mouse = false
+bufferline = "multiple"
+
+# [editor.lsp]
+# display-messages = true
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+
+# [editor.cursor-shape]
+# insert = "bar"

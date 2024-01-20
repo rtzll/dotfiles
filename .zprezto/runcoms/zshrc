@@ -1,10 +1,3 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -37,20 +30,17 @@ export LESS="-F -g -i -M -R -S -w -X -z-4"
 export LANG="en_US.UTF-8"
 
 # pnpm
-export PNPM_HOME="/Users/christianrotzoll/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 # deno
-export DENO_INSTALL="/Users/christianrotzoll/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # bun
-[ -s "/Users/christianrotzoll/.bun/_bun" ] && source "/Users/christianrotzoll/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# zls for zig lsp
-export PATH="$HOME/development/zls/zig-out/bin:$PATH"
 
 # golang bin dir on path
 export PATH="$HOME/go/bin:$PATH"
@@ -74,10 +64,10 @@ bm() {
         | xargs open
 }
 
-# Created by `pipx` on 2023-12-02 11:35:22
-export PATH="$PATH:/Users/christianrotzoll/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+# forgot why this was added
+# [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# zoxide provides the z command
 eval "$(zoxide init zsh)"

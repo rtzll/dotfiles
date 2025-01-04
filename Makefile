@@ -15,6 +15,7 @@ help:
 	@echo "  uninstall  - Remove all configurations"
 	@echo "  nvim       - Install/update neovim configuration"
 	@echo "  helix      - Install/update helix configuration"
+	@echo "  zed        - Install/update zed configuration"
 	@echo "  ghostty    - Install/update ghostty configuration"
 	@echo "  zsh        - Install/update zsh configuration"
 	@echo "  help       - Show this help message"
@@ -37,6 +38,11 @@ nvim:
 helix:
 	mkdir -p "$(CONFIG_DIR)/helix"
 	stow -v -t "$(CONFIG_DIR)/helix" -d .config/helix .
+
+.PHONY: zed
+zed:
+	mkdir -p "$(CONFIG_DIR)/zed"
+	stow -v -t "$(CONFIG_DIR)/zed" -d .config/zed .
 
 .PHONY: ghostty
 ghostty:

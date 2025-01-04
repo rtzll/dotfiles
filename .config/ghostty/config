@@ -1,0 +1,7 @@
+theme = builtin Tango Dark
+# disable ligatures
+font-feature = -calt
+# configure non blinking block cursor
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false

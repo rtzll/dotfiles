@@ -76,4 +76,4 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # Created by `pipx` on 2023-12-02 11:35:22
-export PATH="$PATH:/Users/christianrotzoll/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"

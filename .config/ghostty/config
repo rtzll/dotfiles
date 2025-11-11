@@ -5,3 +5,6 @@ font-feature = -calt
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-style-blink = false
+keybind = shift+enter=text:\n
+font-size = 14
+bell-features = no-title, no-attention

@@ -1,40 +1,164 @@
-# Source Prezto.
+# ── Shell framework ───────────────────────────────────────────────────────────
+#
+# Prezto is the zsh configuration framework providing prompt, completions,
+# syntax highlighting, and other shell enhancements.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+
+# ── Shell environment ─────────────────────────────────────────────────────────
+
+# Disable zsh's command autocorrection — the "zsh: correct 'foo' to 'bar'?" prompt.
+# More disruptive than helpful, especially with custom scripts and unfamiliar tools.
 unsetopt CORRECT
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Default pager with flags for a better reading experience:
+# -F quit if content fits on one screen, -i case-insensitive search,
+# -M show position, -R pass through ANSI colours, -S chop long lines,
+# -X don't clear screen on exit.
+# LANG ensures consistent UTF-8 handling across tools.
+export PAGER=less
+export LESS="-F -g -i -M -R -S -w -X -z-4"
+export LANG="en_US.UTF-8"
 
-# load autocompletions
+# Uses Helix (hx) when available, falls back to vim.
+# GIT_EDITOR is set separately because git doesn't always inherit $EDITOR.
+# The conditional keeps this file portable — safe to copy to machines without Helix.
+if command -v hx >/dev/null; then
+    export EDITOR=hx
+    export VISUAL=hx
+    export GIT_EDITOR=hx
+else
+    export EDITOR=vim
+    export VISUAL=vim
+fi
+
+# Without these settings zsh limits history to ~500 entries and doesn't
+# reliably persist or deduplicate across sessions.
+#
+# SHARE_HISTORY syncs history in real time across all open terminal windows.
+# HIST_IGNORE_SPACE means commands prefixed with a space are not saved —
+# useful for sensitive commands you don't want in history.
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+
+
+# ── Completion ────────────────────────────────────────────────────────────────
+#
+# Loads zsh's tab-completion engine and scans $fpath for completion scripts.
+# These completions power Tab after git, brew, docker, fnm, etc.
 fpath=(~/.zsh $fpath)
+fpath=(~/.zsh/functions $fpath)
+autoload -Uz rename_clean
+# fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit
 compinit -u
 
 
+# ── JavaScript / TypeScript ───────────────────────────────────────────────────
+
+# fnm — Fast Node Manager, replaces NVM.
+# Much faster at startup than NVM. --use-on-cd switches Node versions
+# automatically when entering a directory with a .nvmrc or .node-version file.
+# Install: brew install fnm
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# pnpm — performant Node package manager
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# bun — JavaScript runtime and package manager
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# deno — JavaScript/TypeScript runtime
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+
+# ── Go ────────────────────────────────────────────────────────────────────────
+#
+# Adds the Go toolchain bin directory to PATH, where compiled binaries
+# from `go install` land.
+export PATH="$HOME/go/bin:$PATH"
+
+
+# ── Haskell ───────────────────────────────────────────────────────────────────
+#
+# ghcup manages the Haskell toolchain: GHC compiler, cabal, stack, HLS.
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
+
+# ── OCaml ─────────────────────────────────────────────────────────────────────
+#
+# opam is the OCaml package manager. Its init script sets PATH and environment
+# variables for the active switch (compiler version + installed packages).
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+
+
+# ── Data / Databases ──────────────────────────────────────────────────────────
+
+# Homebrew's SQLite is keg-only (won't shadow macOS's built-in), so we add it
+# to PATH explicitly to ensure tools that need a newer version find it first.
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+
+# ── Tools ─────────────────────────────────────────────────────────────────────
+
+# fzf — fuzzy finder
+# ~/.fzf.zsh sets up PATH, tab completions, and key bindings.
+# Active key bindings: Ctrl+R (history), Ctrl+T (file picker), Alt+C (cd jump).
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zoxide — smarter cd
+# Tracks visited directories so you can jump with `z <partial-name>`
+# instead of typing full paths.
 eval "$(zoxide init zsh)"
 
+# jj — Jujutsu VCS shell completions
+source <(COMPLETE=zsh jj)
 
-# haskell
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-# ocaml
-[[ ! -r '$HOME/.opam/opam-init/init.zsh' ]] || source '$HOME/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-eval "$(pyenv init --path)"
+# Kitty terminal SSH integration.
+# Replaces ssh with kitty's kitten wrapper, which preserves terminal features
+# like the graphics protocol over SSH sessions.
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
-alias update-src='for d in ~/src/*-src/* ~/src/_*/* ~/src/*/; do [ -d "$d/.git" ] && (cd "$d" && echo "$d" && git pull); done'
 
-function h() {
-  hugo server  -F -O -N -D
+# ── Functions ─────────────────────────────────────────────────────────────────
+
+# bm — fuzzy Chrome bookmark browser
+# Opens a fzf picker over Chrome bookmarks and opens the selected URL.
+# Requires: jq, fzf
+bm() {
+     bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+
+     jq_script='
+        def ancestors: while(. | length >= 2; del(.[-1,-2]));
+        . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
+
+    jq -r "$jq_script" < "$bookmarks_path" \
+        | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
+        | fzf --ansi \
+        | cut -d$'\t' -f2 \
+        | xargs open
 }
 
-alias love="/Applications/love.app/Contents/MacOS/love"
+# h — start a local Hugo dev server
+# Flags: -F future posts, -O open browser, -N no caching, -D include drafts
+function h() {
+  hugo server -F -O -N -D --bind 0.0.0.0
+}
 
+# y — yazi file manager wrapper
+# Changes the shell's working directory to wherever you navigated inside yazi.
+# Without this wrapper the directory change would be lost when yazi exits.
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -43,3 +167,40 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+
+# ── Aliases ───────────────────────────────────────────────────────────────────
+
+alias lg='lazygit'
+
+# rm — moves files to Trash instead of permanently deleting them.
+# Provides the same safety net as dragging to Trash in Finder.
+# Use `command rm` to bypass this and permanently delete when you're certain.
+alias rm='trash'
+
+# hermes — runs the Hermes Agent CLI on the remote Hetzner server over SSH.
+# Locally behaves as if you're on the server, sharing the same session state,
+# memory, and config as the Telegram bot.
+alias hermes='ssh hermes -t "PATH=/root/.local/bin:/root/.hermes/bin:\$PATH hermes"'
+
+# Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
+# CLI tool. Unaliasing here frees it up for lk (LiveKit).
+unalias lk
+
+
+# ── PATH ──────────────────────────────────────────────────────────────────────
+
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$PATH"
+
+
+# ── Java / JVM ────────────────────────────────────────────────────────────────
+#
+# SDKMAN manages JVM tooling: Java, Kotlin, Gradle, Maven, Scala, etc.
+# Binaries live in ~/.sdkman/candidates/ and only land on PATH when loaded —
+# removing this would break java, gradle, etc.
+#
+# NOTE: Must remain at the end of the file — SDKMAN requires this.
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

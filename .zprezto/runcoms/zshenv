@@ -1,23 +1,12 @@
-# Ensure that a non-login, non-interactive shell has a defined environment.
+# Defines environment variables for all shells.
+# Loaded for every shell invocation: interactive, non-interactive, scripts, cron.
+# Keep extremely minimal — this runs on every shell including scripts.
+
+# Prezto: ensure non-login, non-interactive shells (e.g. scripts) still get
+# the login environment by sourcing .zprofile when needed.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-export PNPM_HOME="$HOME/Library/pnpm"
-export DENO_INSTALL="$HOME/.deno"
-export BUN_INSTALL="$HOME/.bun"
-export PYENV_ROOT="$HOME/.pyenv"
-
-if command -v hx >/dev/null; then
-    export EDITOR=hx
-    export VISUAL=hx
-else
-    export EDITOR=vim
-    export VISUAL=vim
-fi
-
-export PAGER=less
-export LESS="-F -g -i -M -R -S -w -X -z-4"
-export LANG="en_US.UTF-8"
-
+# Rust toolchain — needed in scripts and non-interactive shells.
 . "$HOME/.cargo/env"

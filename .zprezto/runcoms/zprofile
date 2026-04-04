@@ -1,81 +1,88 @@
-# Executes commands at login pre-zshrc.
+# Executes commands at login, before .zshrc.
+# Loaded once per login session — use for environment setup and slow-to-init tools.
+# Scripts and SSH sessions load this but not .zshrc, so keep environment vars here.
 
-#
-# Browser
-#
 
-if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+# ── Environment ───────────────────────────────────────────────────────────────
+
+# Default browser on macOS.
+export BROWSER='open'
+
+# Default editor — uses Helix when available, falls back to vim.
+# GIT_EDITOR set separately as git doesn't always inherit $EDITOR.
+if command -v hx >/dev/null 2>&1; then
+  export EDITOR='hx'
+  export VISUAL='hx'
+  export GIT_EDITOR='hx'
+else
+  export EDITOR='vim'
+  export VISUAL='vim'
 fi
 
-#
-# Editors
-#
+# Default pager and locale.
+export PAGER='less'
+export LESS='-F -g -i -M -R -S -w -X -z-4'
+export LANG='en_US.UTF-8'
 
-if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nano'
-fi
-if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
-fi
-if [[ -z "$PAGER" ]]; then
-  export PAGER='less'
-fi
 
-#
-# Language
-#
+# ── PATH ──────────────────────────────────────────────────────────────────────
 
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-
-#
-# Paths
-#
-
-# Ensure path arrays do not contain duplicates.
+# Ensure PATH has no duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Set the list of directories that Zsh searches for programs.
+# Bootstrap Homebrew — must run early so brew-installed tools are on PATH
+# for everything that follows.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# pnpm stores its bin directory under ~/Library/pnpm.
+export PNPM_HOME="$HOME/Library/pnpm"
+
+# bun and deno use their own install directories.
+export BUN_INSTALL="$HOME/.bun"
+export DENO_INSTALL="$HOME/.deno"
+
+# All PATH entries consolidated in one place.
 path=(
+  $HOME/bin(N)
+  $HOME/.local/bin(N)
+  $HOME/.opencode/bin(N)
+  $HOME/go/bin(N)
+  $PNPM_HOME(N)
+  $BUN_INSTALL/bin(N)
+  $DENO_INSTALL/bin(N)
+  /opt/homebrew/opt/sqlite/bin(N)
   $HOME/{,s}bin(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
-  $PNPM_HOME
-  $DENO_INSTALL/bin
-  $BUN_INSTALL/bin
-  $HOME/go/bin
-  $HOME/.yarn/bin
-  $HOME/.config/yarn/global/node_modules/.bin
-  /opt/homebrew/opt/sqlite/bin
-  $HOME/.local/bin
-  $HOME/.sst/bin
-  $HOME/.rbenv/bin
-  $PYENV_ROOT/bin
-  $HOME/src/v-analyzer/bin
   $path
 )
 
-# Initialize homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Initialize rbenv
-eval "$(rbenv init -)"
-
+# ── Haskell ───────────────────────────────────────────────────────────────────
 #
-# Less
+# ghcup manages the Haskell toolchain: GHC compiler, cabal, stack, HLS.
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
+
+# ── OCaml ─────────────────────────────────────────────────────────────────────
 #
+# opam is the OCaml package manager. Its init script sets PATH and environment
+# variables for the active switch (compiler version + installed packages).
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
 
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X to enable it.
-if [[ -z "$LESS" ]]; then
-  export LESS='-g -i -M -R -S -w -X -z-4'
-fi
 
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
+# ── Tools ─────────────────────────────────────────────────────────────────────
+
+# OrbStack — command-line tools and shell integration.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+
+# ── Java / JVM ────────────────────────────────────────────────────────────────
+#
+# SDKMAN manages JVM tooling: Java, Kotlin, Gradle, Maven, Scala, etc.
+# Binaries live in ~/.sdkman/candidates/ and only land on PATH when loaded —
+# removing this would break java, gradle, etc.
+#
+# NOTE: Must remain at the end of the file — SDKMAN requires this.
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

@@ -13,27 +13,6 @@ fi
 # More disruptive than helpful, especially with custom scripts and unfamiliar tools.
 unsetopt CORRECT
 
-# Default pager with flags for a better reading experience:
-# -F quit if content fits on one screen, -i case-insensitive search,
-# -M show position, -R pass through ANSI colours, -S chop long lines,
-# -X don't clear screen on exit.
-# LANG ensures consistent UTF-8 handling across tools.
-export PAGER=less
-export LESS="-F -g -i -M -R -S -w -X -z-4"
-export LANG="en_US.UTF-8"
-
-# Uses Helix (hx) when available, falls back to vim.
-# GIT_EDITOR is set separately because git doesn't always inherit $EDITOR.
-# The conditional keeps this file portable — safe to copy to machines without Helix.
-if command -v hx >/dev/null; then
-    export EDITOR=hx
-    export VISUAL=hx
-    export GIT_EDITOR=hx
-else
-    export EDITOR=vim
-    export VISUAL=vim
-fi
-
 # Without these settings zsh limits history to ~500 entries and doesn't
 # reliably persist or deduplicate across sessions.
 #
@@ -69,45 +48,8 @@ compinit -u
 # Install: brew install fnm
 eval "$(fnm env --use-on-cd --shell zsh)"
 
-# pnpm — performant Node package manager
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-# bun — JavaScript runtime and package manager
+# bun shell completions — interactive shells only.
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# deno — JavaScript/TypeScript runtime
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-
-# ── Go ────────────────────────────────────────────────────────────────────────
-#
-# Adds the Go toolchain bin directory to PATH, where compiled binaries
-# from `go install` land.
-export PATH="$HOME/go/bin:$PATH"
-
-
-# ── Haskell ───────────────────────────────────────────────────────────────────
-#
-# ghcup manages the Haskell toolchain: GHC compiler, cabal, stack, HLS.
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-
-
-# ── OCaml ─────────────────────────────────────────────────────────────────────
-#
-# opam is the OCaml package manager. Its init script sets PATH and environment
-# variables for the active switch (compiler version + installed packages).
-[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
-
-
-# ── Data / Databases ──────────────────────────────────────────────────────────
-
-# Homebrew's SQLite is keg-only (won't shadow macOS's built-in), so we add it
-# to PATH explicitly to ensure tools that need a newer version find it first.
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 
 # ── Tools ─────────────────────────────────────────────────────────────────────
@@ -124,11 +66,6 @@ eval "$(zoxide init zsh)"
 
 # jj — Jujutsu VCS shell completions
 source <(COMPLETE=zsh jj)
-
-# Kitty terminal SSH integration.
-# Replaces ssh with kitty's kitten wrapper, which preserves terminal features
-# like the graphics protocol over SSH sessions.
-[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 
 # ── Functions ─────────────────────────────────────────────────────────────────
@@ -186,21 +123,3 @@ alias hermes='ssh hermes -t "PATH=/root/.local/bin:/root/.hermes/bin:\$PATH herm
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).
 unalias lk
-
-
-# ── PATH ──────────────────────────────────────────────────────────────────────
-
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.opencode/bin:$PATH"
-
-
-# ── Java / JVM ────────────────────────────────────────────────────────────────
-#
-# SDKMAN manages JVM tooling: Java, Kotlin, Gradle, Maven, Scala, etc.
-# Binaries live in ~/.sdkman/candidates/ and only land on PATH when loaded —
-# removing this would break java, gradle, etc.
-#
-# NOTE: Must remain at the end of the file — SDKMAN requires this.
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

@@ -37,9 +37,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # pnpm stores its bin directory under ~/Library/pnpm.
 export PNPM_HOME="$HOME/Library/pnpm"
 
-# bun and deno use their own install directories.
+# bun uses its own install directory; Homebrew provides deno.
 export BUN_INSTALL="$HOME/.bun"
-export DENO_INSTALL="$HOME/.deno"
 
 # All PATH entries consolidated in one place.
 path=(
@@ -49,7 +48,6 @@ path=(
   $HOME/go/bin(N)
   $PNPM_HOME(N)
   $BUN_INSTALL/bin(N)
-  $DENO_INSTALL/bin(N)
   /opt/homebrew/opt/sqlite/bin(N)
   $HOME/{,s}bin(N)
   /opt/{homebrew,local}/{,s}bin(N)
@@ -86,3 +84,7 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 # NOTE: Must remain at the end of the file — SDKMAN requires this.
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/Users/christianrotzoll/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<

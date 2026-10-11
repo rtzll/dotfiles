@@ -1,12 +1,40 @@
-# Defines environment variables for all shells.
-# Loaded for every shell invocation: interactive, non-interactive, scripts, cron.
-# Keep extremely minimal — this runs on every shell including scripts.
+# Essential environment for every zsh, including scripts and non-login shells.
+# Keep this free of subprocesses and login/interactive tool initialization.
 
-# Prezto: ensure non-login, non-interactive shells (e.g. scripts) still get
-# the login environment by sourcing .zprofile when needed.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+typeset -gU path
+
+# Tool installation directories.
+export PNPM_HOME="$HOME/Library/pnpm"
+export BUN_INSTALL="$HOME/.bun"
+export PROTO_HOME="$HOME/.proto"
+export VP_HOME="$HOME/.vite-plus"
+
+# Static PATH entries live here; runtime managers activate in .zshrc.
+path=(
+  $HOME/.pi/agent/bin(N)
+  $PROTO_HOME/shims(N)
+  $PROTO_HOME/bin(N)
+  $VP_HOME/bin(N)
+  $HOME/bin(N)
+  $HOME/.local/bin(N)
+  $HOME/.opencode/bin(N)
+  $HOME/go/bin(N)
+  $PNPM_HOME/bin(N)
+  $PNPM_HOME(N)
+  $BUN_INSTALL/bin(N)
+  $HOME/.ghcup/bin(N)
+  $HOME/.cabal/bin(N)
+  $HOME/.sdkman/candidates/java/current/bin(N)
+  $HOME/.orbstack/bin(N)
+  "/Users/christianrotzoll/Library/Application Support/Coursier/bin"(N)
+  /opt/homebrew/opt/sqlite/bin(N)
+  $HOME/sbin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $path
+  $VP_HOME/fallback-bin(N)
+)
+export PATH
 
 # Rust toolchain — needed in scripts and non-interactive shells.
 . "$HOME/.cargo/env"

@@ -1,6 +1,5 @@
-# Executes commands at login, before .zshrc.
-# Loaded once per login session — use for environment setup and slow-to-init tools.
-# Scripts and SSH sessions load this but not .zshrc, so keep environment vars here.
+# Login-session setup, loaded before .zshrc.
+# Essential paths for scripts and non-login shells live in .zshenv.
 
 
 # ── Environment ───────────────────────────────────────────────────────────────
@@ -33,34 +32,6 @@ typeset -gU cdpath fpath mailpath path
 # Bootstrap Homebrew — must run early so brew-installed tools are on PATH
 # for everything that follows.
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# pnpm stores its bin directory under ~/Library/pnpm.
-export PNPM_HOME="$HOME/Library/pnpm"
-
-# Tool installation directories; Homebrew provides deno.
-export BUN_INSTALL="$HOME/.bun"
-export PROTO_HOME="$HOME/.proto"
-
-# Static PATH entries consolidated in one place.
-path=(
-  $HOME/.pi/agent/bin(N)
-  $PROTO_HOME/shims(N)
-  $PROTO_HOME/bin(N)
-  $HOME/bin(N)
-  $HOME/.local/bin(N)
-  $HOME/.opencode/bin(N)
-  $HOME/go/bin(N)
-  $PNPM_HOME/bin(N)
-  $PNPM_HOME(N)
-  $BUN_INSTALL/bin(N)
-  "/Users/christianrotzoll/Library/Application Support/Coursier/bin"(N)
-  /opt/homebrew/opt/sqlite/bin(N)
-  $HOME/sbin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  $path
-)
-
 
 # ── Haskell ───────────────────────────────────────────────────────────────────
 #

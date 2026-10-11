@@ -130,7 +130,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Preserve managed Pi and proto shim priority after other tool activation.
-# Static installation paths are configured in .zprofile.
+# Static installation paths are configured in .zshenv.
 typeset -gU path
 path=($HOME/.pi/agent/bin(N) $PROTO_HOME/shims(N) $PROTO_HOME/bin(N) $path)
 

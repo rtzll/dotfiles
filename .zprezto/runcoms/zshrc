@@ -20,8 +20,7 @@ fi
 # More disruptive than helpful, especially with custom scripts and unfamiliar tools.
 unsetopt CORRECT
 
-# Without these settings zsh limits history to ~500 entries and doesn't
-# reliably persist or deduplicate across sessions.
+# Keep a larger history with deduplication and sharing across sessions.
 #
 # SHARE_HISTORY syncs history in real time across all open terminal windows.
 # HIST_IGNORE_SPACE means commands prefixed with a space are not saved —
@@ -37,9 +36,9 @@ setopt HIST_IGNORE_SPACE
 
 # ── JavaScript / TypeScript ───────────────────────────────────────────────────
 
-# fnm — Fast Node Manager, replaces NVM.
-# Much faster at startup than NVM. --use-on-cd switches Node versions
-# automatically when entering a directory with a .nvmrc or .node-version file.
+# fnm — Fast Node Manager.
+# --use-on-cd switches Node versions when entering a directory containing
+# a .nvmrc or .node-version file.
 # Install: brew install fnm
 if (( $+commands[fnm] )); then
   eval "$(fnm env --use-on-cd --shell zsh)"

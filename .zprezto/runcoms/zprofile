@@ -7,8 +7,7 @@
 # Default browser on macOS.
 export BROWSER='open'
 
-# Default editor — uses Helix when available, falls back to vim.
-# GIT_EDITOR set separately as git doesn't always inherit $EDITOR.
+# Use Helix when available, otherwise Vim, for shell utilities and Git.
 if command -v hx >/dev/null 2>&1; then
   export EDITOR='hx'
   export VISUAL='hx'
@@ -24,13 +23,13 @@ export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 
-# ── PATH ──────────────────────────────────────────────────────────────────────
+# ── Homebrew ──────────────────────────────────────────────────────────────────
 
 # Ensure PATH has no duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Bootstrap Homebrew — must run early so brew-installed tools are on PATH
-# for everything that follows.
+# Essential binary paths are already set in .zshenv.
+# Load Homebrew's additional login-session environment when available.
 if (( $+commands[brew] )); then
   eval "$(brew shellenv)"
 fi
@@ -59,9 +58,8 @@ fi
 # ── Java / JVM ────────────────────────────────────────────────────────────────
 #
 # SDKMAN manages JVM tooling: Java, Kotlin, Gradle, Maven, Scala, etc.
-# Binaries live in ~/.sdkman/candidates/ and only land on PATH when loaded —
-# removing this would break java, gradle, etc.
-#
-# NOTE: Must remain at the end of the file — SDKMAN requires this.
+# .zshenv exposes the current Java binary to scripts; initialize SDKMAN here
+# for its sdk function and the remaining JVM-tool environment.
+# Keep this after the other login-session initialization.
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -r "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

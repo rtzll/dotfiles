@@ -37,4 +37,4 @@ path=(
 export PATH
 
 # Rust toolchain — needed in scripts and non-interactive shells.
-. "$HOME/.cargo/env"
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"

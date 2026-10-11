@@ -31,25 +31,29 @@ typeset -gU cdpath fpath mailpath path
 
 # Bootstrap Homebrew — must run early so brew-installed tools are on PATH
 # for everything that follows.
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if (( $+commands[brew] )); then
+  eval "$(brew shellenv)"
+fi
 
 # ── Haskell ───────────────────────────────────────────────────────────────────
 #
 # ghcup manages the Haskell toolchain: GHC compiler, cabal, stack, HLS.
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+[[ -r "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
 
 
 # ── OCaml ─────────────────────────────────────────────────────────────────────
 #
 # opam is the OCaml package manager. Its init script sets PATH and environment
 # variables for the active switch (compiler version + installed packages).
-[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+if [[ -r "$HOME/.opam/opam-init/init.zsh" ]]; then
+  source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2>&1
+fi
 
 
 # ── Tools ─────────────────────────────────────────────────────────────────────
 
 # OrbStack — command-line tools and shell integration.
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+[[ -r "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"
 
 
 # ── Java / JVM ────────────────────────────────────────────────────────────────
@@ -60,4 +64,4 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 #
 # NOTE: Must remain at the end of the file — SDKMAN requires this.
 export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -r "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

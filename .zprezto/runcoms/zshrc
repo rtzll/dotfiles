@@ -9,7 +9,7 @@ autoload -Uz rename_clean
 #
 # Prezto is the zsh configuration framework providing prompt, completions,
 # syntax highlighting, and other shell enhancements.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+if [[ -r "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
@@ -41,10 +41,12 @@ setopt HIST_IGNORE_SPACE
 # Much faster at startup than NVM. --use-on-cd switches Node versions
 # automatically when entering a directory with a .nvmrc or .node-version file.
 # Install: brew install fnm
-eval "$(fnm env --use-on-cd --shell zsh)"
+if (( $+commands[fnm] )); then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # bun shell completions — interactive shells only.
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+[[ -r "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 
 # ── Tools ─────────────────────────────────────────────────────────────────────
@@ -52,15 +54,19 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 # fzf — fuzzy finder
 # ~/.fzf.zsh sets up PATH, tab completions, and key bindings.
 # Active key bindings: Ctrl+R (history), Ctrl+T (file picker), Alt+C (cd jump).
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -r "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # zoxide — smarter cd
 # Tracks visited directories so you can jump with `z <partial-name>`
 # instead of typing full paths.
-eval "$(zoxide init zsh)"
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi
 
 # jj — Jujutsu VCS shell completions
-source <(COMPLETE=zsh jj)
+if (( $+commands[jj] )); then
+  source <(COMPLETE=zsh jj)
+fi
 
 
 # ── Functions ─────────────────────────────────────────────────────────────────
@@ -118,12 +124,15 @@ alias hermes-dashboard='ssh -L 9119:127.0.0.1:9119 hermes -t "hermes dashboard -
 
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).
-unalias lk
+(( $+aliases[lk] )) && unalias lk
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+[[ -r "$VP_HOME/env" ]] && source "$VP_HOME/env"
+
 # mise
-eval "$(mise activate zsh)"
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+fi
 
 alias c='codex resume'
 export LANG=en_US.UTF-8

@@ -3,6 +3,9 @@
 
 typeset -gU path
 
+# Default locale without overriding an explicitly selected locale.
+export LANG="${LANG:-en_US.UTF-8}"
+
 # Tool installation directories.
 export PNPM_HOME="$HOME/Library/pnpm"
 export BUN_INSTALL="$HOME/.bun"

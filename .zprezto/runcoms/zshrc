@@ -123,17 +123,6 @@ unalias lk
 # bun completions
 [ -s "/Users/christianrotzoll/.bun/_bun" ] && source "/Users/christianrotzoll/.bun/_bun"
 
-# opencode
-export PATH=/Users/christianrotzoll/.opencode/bin:$PATH
-
-# pnpm
-export PNPM_HOME="/Users/christianrotzoll/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end
-
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
 # mise
@@ -143,11 +132,9 @@ alias c='codex resume'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# proto
-export PROTO_HOME="$HOME/.proto";
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
-
-# Pi managed installation (updates with: pi update)
-export PATH="$HOME/.pi/agent/bin:$PATH"
+# Preserve managed Pi and proto shim priority after other tool activation.
+# Static installation paths are configured in .zprofile.
+typeset -gU path
+path=($HOME/.pi/agent/bin(N) $PROTO_HOME/shims(N) $PROTO_HOME/bin(N) $path)
 
 alias pil='pi --model opencode-go/gpt-5.6-luna --thinking high'

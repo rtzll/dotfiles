@@ -68,6 +68,19 @@ if (( $+commands[jj] )); then
   source <(COMPLETE=zsh jj)
 fi
 
+# Vite+ shell integration and completions (https://viteplus.dev).
+[[ -r "$VP_HOME/env" ]] && source "$VP_HOME/env"
+
+# mise — retain the existing runtime-manager activation.
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+fi
+
+# Preserve managed Pi and proto shim priority after other tool activation.
+# Static installation paths are configured in .zshenv.
+typeset -gU path
+path=($HOME/.pi/agent/bin(N) $PROTO_HOME/shims(N) $PROTO_HOME/bin(N) $path)
+
 
 # ── Functions ─────────────────────────────────────────────────────────────────
 
@@ -110,6 +123,8 @@ function y() {
 # ── Aliases ───────────────────────────────────────────────────────────────────
 
 alias lg='lazygit'
+alias c='codex resume'
+alias pil='pi --model opencode-go/gpt-5.6-luna --thinking high'
 
 # rm — moves files to Trash instead of permanently deleting them.
 # Provides the same safety net as dragging to Trash in Finder.
@@ -125,20 +140,3 @@ alias hermes-dashboard='ssh -L 9119:127.0.0.1:9119 hermes -t "hermes dashboard -
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).
 (( $+aliases[lk] )) && unalias lk
-
-# Vite+ bin (https://viteplus.dev)
-[[ -r "$VP_HOME/env" ]] && source "$VP_HOME/env"
-
-# mise
-if (( $+commands[mise] )); then
-  eval "$(mise activate zsh)"
-fi
-
-alias c='codex resume'
-
-# Preserve managed Pi and proto shim priority after other tool activation.
-# Static installation paths are configured in .zshenv.
-typeset -gU path
-path=($HOME/.pi/agent/bin(N) $PROTO_HOME/shims(N) $PROTO_HOME/bin(N) $path)
-
-alias pil='pi --model opencode-go/gpt-5.6-luna --thinking high'

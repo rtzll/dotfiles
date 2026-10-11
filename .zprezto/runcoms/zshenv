@@ -11,6 +11,12 @@ export PNPM_HOME="$HOME/Library/pnpm"
 export BUN_INSTALL="$HOME/.bun"
 export PROTO_HOME="$HOME/.proto"
 export VP_HOME="$HOME/.vite-plus"
+export SDKMAN_DIR="$HOME/.sdkman"
+
+# Scripts can use SDKMAN's current Java without initializing the sdk function.
+if [[ -d "$SDKMAN_DIR/candidates/java/current" ]]; then
+  export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
+fi
 
 # Static PATH entries live here; runtime managers activate in .zshrc.
 path=(
@@ -27,7 +33,7 @@ path=(
   $BUN_INSTALL/bin(N)
   $HOME/.ghcup/bin(N)
   $HOME/.cabal/bin(N)
-  $HOME/.sdkman/candidates/java/current/bin(N)
+  $SDKMAN_DIR/candidates/java/current/bin(N)
   $HOME/.orbstack/bin(N)
   "$HOME/Library/Application Support/Coursier/bin"(N)
   /opt/homebrew/opt/sqlite/bin(N)

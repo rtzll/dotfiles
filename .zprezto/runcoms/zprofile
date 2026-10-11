@@ -53,13 +53,3 @@ fi
 
 # OrbStack — command-line tools and shell integration.
 [[ -r "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"
-
-
-# ── Java / JVM ────────────────────────────────────────────────────────────────
-#
-# SDKMAN manages JVM tooling: Java, Kotlin, Gradle, Maven, Scala, etc.
-# .zshenv exposes the current Java binary to scripts; initialize SDKMAN here
-# for its sdk function and the remaining JVM-tool environment.
-# Keep this after the other login-session initialization.
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -r "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

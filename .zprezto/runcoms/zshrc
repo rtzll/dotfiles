@@ -34,6 +34,13 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
 
 
+# ── Java / JVM ────────────────────────────────────────────────────────────────
+
+# Initialize SDKMAN after Prezto so its completion reuses compinit.
+# .zshenv exposes the current Java binary and JAVA_HOME to scripts.
+[[ -r "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+
 # ── JavaScript / TypeScript ───────────────────────────────────────────────────
 
 # fnm — Fast Node Manager.

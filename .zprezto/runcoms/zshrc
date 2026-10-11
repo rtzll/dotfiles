@@ -118,7 +118,8 @@ alias rm='trash'
 # hermes — runs the Hermes Agent CLI on the remote Hetzner server over SSH.
 # Locally behaves as if you're on the server, sharing the same session state,
 # memory, and config as the Telegram bot.
-alias hermes='ssh hermes -t "PATH=/root/.local/bin:/root/.hermes/bin:\$PATH hermes"'
+alias hermes='ssh hermes -t hermes'
+alias hermes-dashboard='ssh -L 9119:127.0.0.1:9119 hermes -t "hermes dashboard --no-open"'
 
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).

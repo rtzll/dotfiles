@@ -16,6 +16,7 @@ if command -v hx >/dev/null 2>&1; then
 else
   export EDITOR='vim'
   export VISUAL='vim'
+  export GIT_EDITOR='vim'
 fi
 
 # Default pager; locale is configured in .zshenv.

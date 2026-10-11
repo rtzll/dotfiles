@@ -75,9 +75,9 @@ fi
 # Opens a fzf picker over Chrome bookmarks and opens the selected URL.
 # Requires: jq, fzf
 bm() {
-     bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+    local bookmarks_path="$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
-     jq_script='
+    local jq_script='
         def ancestors: while(. | length >= 2; del(.[-1,-2]));
         . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
 

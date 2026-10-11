@@ -120,9 +120,6 @@ alias hermes-dashboard='ssh -L 9119:127.0.0.1:9119 hermes -t "hermes dashboard -
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).
 unalias lk
 
-# bun completions
-[ -s "/Users/christianrotzoll/.bun/_bun" ] && source "/Users/christianrotzoll/.bun/_bun"
-
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
 # mise

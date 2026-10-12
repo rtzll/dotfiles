@@ -38,6 +38,7 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'syntax-highlighting' \
   'history-substring-search' \
   'autosuggestions' \
   'git' \
@@ -196,15 +197,10 @@ zstyle ':prezto:module:prompt' theme 'peepcode' '$'
 # Syntax Highlighting
 #
 
-# Set syntax highlighters.
-# By default, only the main highlighter is enabled.
-# zstyle ':prezto:module:syntax-highlighting' highlighters \
-#   'main' \
-#   'brackets' \
-#   'pattern' \
-#   'line' \
-#   'cursor' \
-#   'root'
+# Highlight command syntax and matching brackets.
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets'
 #
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \

@@ -140,3 +140,9 @@ alias rm='trash'
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).
 (( $+aliases[lk] )) && unalias lk
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<

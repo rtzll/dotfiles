@@ -43,14 +43,6 @@ setopt HIST_IGNORE_SPACE
 
 # ── JavaScript / TypeScript ───────────────────────────────────────────────────
 
-# fnm — Fast Node Manager.
-# --use-on-cd switches Node versions when entering a directory containing
-# a .nvmrc or .node-version file.
-# Install: brew install fnm
-if (( $+commands[fnm] )); then
-  eval "$(fnm env --use-on-cd --shell zsh)"
-fi
-
 # bun shell completions — interactive shells only.
 [[ -r "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 

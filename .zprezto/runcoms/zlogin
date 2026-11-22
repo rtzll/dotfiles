@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+unsetopt BG_NICE
+
 # Execute code that does not affect the current session in the background.
 {
   # Compile the completion dump to increase startup speed.

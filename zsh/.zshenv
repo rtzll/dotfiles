@@ -11,11 +11,10 @@ export PNPM_HOME="$HOME/Library/pnpm"
 export BUN_INSTALL="$HOME/.bun"
 export PROTO_HOME="$HOME/.proto"
 export VP_HOME="$HOME/.vite-plus"
-export SDKMAN_DIR="$HOME/.sdkman"
 
-# Expose SDKMAN's current Java without loading SDKMAN in every shell.
-if [[ -d "$SDKMAN_DIR/candidates/java/current" ]]; then
-  export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
+# Temurin 21 (brew cask temurin@21) is the only JDK; /usr/bin/java finds it.
+if [[ -d /Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home ]]; then
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home
 fi
 
 # Static PATH entries live here; runtime managers activate in .zshrc.
@@ -32,7 +31,6 @@ path=(
   $PNPM_HOME/bin(N)
   $PNPM_HOME(N)
   $BUN_INSTALL/bin(N)
-  $SDKMAN_DIR/candidates/java/current/bin(N)
   $HOME/.orbstack/bin(N)
   "$HOME/Library/Application Support/Coursier/bin"(N)
   /opt/homebrew/opt/sqlite/bin(N)

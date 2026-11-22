@@ -13,7 +13,6 @@ help:
 	@echo "Targets:"
 	@echo "  install    - Install all configurations"
 	@echo "  uninstall  - Remove all configurations"
-	@echo "  nvim       - Install/update neovim configuration"
 	@echo "  helix      - Install/update helix configuration"
 	@echo "  zed        - Install/update zed configuration"
 	@echo "  ghostty    - Install/update ghostty configuration"
@@ -21,18 +20,12 @@ help:
 	@echo "  help       - Show this help message"
 
 .PHONY: install uninstall
-install: nvim helix ghostty zsh
+install: helix zed ghostty zsh
 
 uninstall:
-	stow -v -D -t "$(CONFIG_DIR)/nvim" -d .config/nvim .
 	stow -v -D -t "$(CONFIG_DIR)/helix" -d .config/helix .
 	stow -v -D -t "$(GHOSTTY_DIR)" -d .config/ghostty .
 	stow -v -D -t "$(HOME_DIR)" -d .zprezto/runcoms .
-
-.PHONY: nvim
-nvim:
-	mkdir -p "$(CONFIG_DIR)/nvim"
-	stow -v -t "$(CONFIG_DIR)/nvim" -d .config/nvim .
 
 .PHONY: helix
 helix:

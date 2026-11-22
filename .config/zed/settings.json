@@ -1,5 +1,15 @@
 {
   "agent": { "enabled": false },
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
   "project_panel": { "dock": "right" },
   "features": { "edit_prediction_provider": "none" },
   "cursor_blink": false,

@@ -8,3 +8,4 @@ cursor-style-blink = false
 keybind = shift+enter=text:\n
 font-size = 14
 bell-features = no-title, no-attention
+keybind = alt+backspace=text:\x1b\x7f

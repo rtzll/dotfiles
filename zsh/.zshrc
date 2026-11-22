@@ -75,23 +75,6 @@ path=($HOME/.pi/agent/bin(N) $PROTO_HOME/shims(N) $PROTO_HOME/bin(N) $path)
 
 # ── Functions ─────────────────────────────────────────────────────────────────
 
-# bm — fuzzy Chrome bookmark browser
-# Opens a fzf picker over Chrome bookmarks and opens the selected URL.
-# Requires: jq, fzf
-bm() {
-    local bookmarks_path="$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
-
-    local jq_script='
-        def ancestors: while(. | length >= 2; del(.[-1,-2]));
-        . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
-
-    jq -r "$jq_script" < "$bookmarks_path" \
-        | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
-        | fzf --ansi \
-        | cut -d$'\t' -f2 \
-        | xargs open
-}
-
 # h — start a local Hugo dev server
 # Flags: -F future posts, -O open browser, -N no caching, -D include drafts
 function h() {
@@ -115,7 +98,6 @@ function y() {
 
 alias lg='lazygit'
 alias c='codex resume'
-alias pil='pi --model opencode-go/gpt-5.6-luna --thinking high'
 
 # rm — moves files to Trash instead of permanently deleting them.
 # Provides the same safety net as dragging to Trash in Finder.

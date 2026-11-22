@@ -38,7 +38,6 @@ path=(
   $HOME/.orbstack/bin(N)
   "$HOME/Library/Application Support/Coursier/bin"(N)
   /opt/homebrew/opt/sqlite/bin(N)
-  $HOME/sbin(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
   $path

@@ -32,8 +32,6 @@ path=(
   $PNPM_HOME/bin(N)
   $PNPM_HOME(N)
   $BUN_INSTALL/bin(N)
-  $HOME/.ghcup/bin(N)
-  $HOME/.cabal/bin(N)
   $SDKMAN_DIR/candidates/java/current/bin(N)
   $HOME/.orbstack/bin(N)
   "$HOME/Library/Application Support/Coursier/bin"(N)

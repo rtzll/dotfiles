@@ -34,12 +34,6 @@ if (( $+commands[brew] )); then
   eval "$(brew shellenv)"
 fi
 
-# ── Haskell ───────────────────────────────────────────────────────────────────
-#
-# ghcup manages the Haskell toolchain: GHC compiler, cabal, stack, HLS.
-[[ -r "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
-
-
 # ── OCaml ─────────────────────────────────────────────────────────────────────
 #
 # opam is the OCaml package manager. Its init script sets PATH and environment

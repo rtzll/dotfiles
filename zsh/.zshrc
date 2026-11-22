@@ -1,7 +1,7 @@
 # ── Completion paths ──────────────────────────────────────────────────────────
 
 # Prezto initializes completion; register custom functions before it loads.
-fpath=(~/.zsh/functions(N) ~/.zsh(N) $fpath)
+fpath=(~/.zsh/functions(N) ~/.zsh(N) ~/.grok/completions/zsh(N) $fpath)
 autoload -Uz rename_clean
 
 
@@ -140,13 +140,3 @@ alias rm='trash'
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).
 (( $+aliases[lk] )) && unalias lk
-
-# >>> grok installer >>>
-export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<
-
-
-# Added by Antigravity CLI installer
-export PATH="/Users/christianrotzoll/.local/bin:$PATH"

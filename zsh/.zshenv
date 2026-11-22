@@ -26,6 +26,7 @@ path=(
   $VP_HOME/bin(N)
   $HOME/bin(N)
   $HOME/.local/bin(N)
+  $HOME/.grok/bin(N)
   $HOME/.opencode/bin(N)
   $HOME/go/bin(N)
   $PNPM_HOME/bin(N)

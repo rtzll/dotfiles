@@ -53,3 +53,7 @@ fi
 
 # OrbStack — command-line tools and shell integration.
 [[ -r "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/christianrotzoll/.local/bin:$PATH"

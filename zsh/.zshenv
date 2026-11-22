@@ -13,7 +13,7 @@ export PROTO_HOME="$HOME/.proto"
 export VP_HOME="$HOME/.vite-plus"
 export SDKMAN_DIR="$HOME/.sdkman"
 
-# Scripts can use SDKMAN's current Java without initializing the sdk function.
+# Expose SDKMAN's current Java without loading SDKMAN in every shell.
 if [[ -d "$SDKMAN_DIR/candidates/java/current" ]]; then
   export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 fi

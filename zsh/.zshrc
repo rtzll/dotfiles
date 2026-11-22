@@ -102,7 +102,37 @@ alias c='codex resume'
 # rm — moves files to Trash instead of permanently deleting them.
 # Provides the same safety net as dragging to Trash in Finder.
 # Use `command rm` to bypass this and permanently delete when you're certain.
-alias rm='trash'
+#
+# macOS trash rejects rm's flags, so they are dropped: folders always go to
+# the Trash, and -f only silences missing paths, like rm -f.
+(( $+aliases[rm] )) && unalias rm
+rm() {
+  local arg force=0 options_done=0 missing=0
+  local -a targets
+
+  for arg in "$@"; do
+    if (( ! options_done )) && [[ $arg == -- ]]; then
+      options_done=1
+    elif (( ! options_done )) && [[ $arg =~ '^-[rRfidvI]+$' ]]; then
+      [[ $arg == *f* ]] && force=1
+    elif [[ -e $arg || -L $arg ]]; then
+      # trash has no `--`, so protect names that start with a dash.
+      [[ $arg == -* ]] && arg="./$arg"
+      targets+=("$arg")
+    elif (( ! force )); then
+      print -u2 "rm: $arg: No such file or directory"
+      missing=1
+    fi
+  done
+
+  if (( $#targets )); then
+    trash "${targets[@]}" || return
+  elif (( ! force && ! missing )); then
+    print -u2 "usage: rm [-rf] file ..."
+    return 64
+  fi
+  return $missing
+}
 
 # Prezto aliases lk to a file listing variant, which conflicts with the LiveKit
 # CLI tool. Unaliasing here frees it up for lk (LiveKit).

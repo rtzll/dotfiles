@@ -24,6 +24,7 @@ install: helix zed ghostty zsh
 
 uninstall:
 	stow -v -D -t "$(CONFIG_DIR)/helix" -d .config/helix .
+	stow -v -D -t "$(CONFIG_DIR)/zed" -d .config/zed .
 	stow -v -D -t "$(GHOSTTY_DIR)" -d .config/ghostty .
 	stow -v -D -t "$(HOME_DIR)" -d .zprezto/runcoms .
 

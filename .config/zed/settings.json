@@ -1,5 +1,5 @@
 {
-  "agent": { "enabled": false },
+  // "agent": { "enabled": false },
   "cli_default_open_behavior": "new_window",
   "outline_panel": {
     "dock": "right"
@@ -10,8 +10,37 @@
   "git_panel": {
     "dock": "right"
   },
+  "agent_servers": {
+    "antigravity-acp": {
+      "default_config_options": {
+        "mode": "yolo",
+        "model": "gemini-4-neon"
+      },
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "fast-mode": true
+      },
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "agent": {
+    "dock": "left",
+    "default_model": {
+      "provider": "openai-subscribed",
+      "model": "gpt-5.5",
+      "enable_thinking": true,
+      "effort": "medium"
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
   "project_panel": { "dock": "right" },
-  "features": { "edit_prediction_provider": "none" },
+  // "features": { "edit_prediction_provider": "none" },
   "cursor_blink": false,
   "theme": "Andromeda",
   "buffer_font_size": 15,

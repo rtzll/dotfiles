@@ -20,7 +20,7 @@
     },
     "codex-acp": {
       "default_config_options": {
-        "fast-mode": true
+        "fast-mode": false
       },
       "type": "registry"
     },
